@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>AAV Animal | Chimpanzee World</title>
+
+  <style>
+    /* =========================
+       RESET
+    ========================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #07110c;
+      color: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(5, 15, 10, 0.82);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: auto;
+      height: 75px;
+      padding: 0 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #d8ff4f;
+    }
+
+    .logo span {
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: #ddd;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #d8ff4f;
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(4, 15, 9, 0.96) 0%,
+          rgba(4, 15, 9, 0.78) 45%,
+          rgba(4, 15, 9, 0.25) 100%
+        ),
+        url("https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?auto=format&fit=crop&w=1800&q=85")
+        center/cover no-repeat;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      width: 100%;
+      margin: auto;
+      padding: 120px 25px 60px;
+    }
+
+    .hero-text {
+      max-width: 650px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 50px;
+      background: rgba(216, 255, 79, 0.12);
+      color: #d8ff4f;
+      border: 1px solid rgba(216, 255, 79, 0.25);
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(50px, 8vw, 95px);
+      line-height: 0.95;
+      margin-bottom: 25px;
+      letter-spacing: -4px;
+    }
+
+    .hero h1 span {
+      color: #d8ff4f;
+    }
+
+    .hero p {
+      color: #d5d5d5;
+      font-size: 18px;
+      max-width: 580px;
+      margin-bottom: 35px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 25px;
+      border-radius: 50px;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: #d8ff4f;
+      color: #081008;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(216,255,79,0.25);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+    }
+
+    .btn-outline:hover {
+      background: white;
+      color: #081008;
+    }
+
+    /* =========================
+       COMMON SECTION
+    ========================== */
+    section {
+      padding: 100px 25px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-label {
+      color: #d8ff4f;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(35px, 5vw, 60px);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .section-description {
+      max-width: 650px;
+      color: #aaa;
+      margin-bottom: 50px;
+    }
+
+    /* =========================
+       ABOUT
+    ========================== */
+    .about {
+      background: #0a1710;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-image {
+      border-radius: 25px;
+      overflow: hidden;
+      height: 500px;
+    }
+
+    .about-image img {
+      height: 100%;
+      object-fit: cover;
+      transition: 0.6s;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.05);
+    }
+
+    .about-text p {
+      color: #bcbcbc;
+      margin-bottom: 20px;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .fact {
+      padding: 20px;
+      background: #101f15;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 15px;
+    }
+
+    .fact strong {
+      display: block;
+      color: #d8ff4f;
+      font-size: 25px;
+    }
+
+    .fact span {
+      color: #999;
+      font-size: 13px;
+    }
+
+    /* =========================
+       GALLERY
+    ========================== */
+    .gallery {
+      background: #07110c;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .gallery-card {
+      height: 320px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .gallery-card.large {
+      grid-row: span 2;
+      height: 658px;
+    }
+
+    .gallery-card img {
+      height: 100%;
+      object-fit: cover;
+      transition: 0.5s;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 25px;
+      background: linear-gradient(
+        transparent 40%,
+        rgba(0,0,0,0.85)
+      );
+    }
+
+    .gallery-overlay h3 {
+      font-size: 22px;
+    }
+
+    /* =========================
+       CONSERVATION
+    ========================== */
+    .conservation {
+      background:
+        linear-gradient(
+          rgba(5,20,10,0.9),
+          rgba(5,20,10,0.95)
+        ),
+        url("https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=1600&q=80")
+        center/cover;
+    }
+
+    .conservation-box {
+      max-width: 750px;
+    }
+
+    .conservation-box p {
+      color: #c4c4c4;
+      margin-bottom: 30px;
+    }
+
+    .progress {
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .progress span {
+      display: block;
+      width: 75%;
+      height: 100%;
+      background: #d8ff4f;
+      border-radius: 20px;
+    }
+
+    /* =========================
+       FACTS
+    ========================== */
+    .facts-section {
+      background: #0a1710;
+    }
+
+    .fact-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .info-card {
+      padding: 35px 28px;
+      border-radius: 20px;
+      background: #101f15;
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: 0.3s;
+    }
+
+    .info-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(216,255,79,0.35);
+    }
+
+    .info-icon {
+      font-size: 35px;
+      margin-bottom: 20px;
+    }
+
+    .info-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .info-card p {
+      color: #999;
+      font-size: 14px;
+    }
+
+    /* =========================
+       CTA
+    ========================== */
+    .cta {
+      text-align: center;
+      background: #d8ff4f;
+      color: #081008;
+    }
+
+    .cta h2 {
+      font-size: clamp(40px, 6vw, 70px);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .cta p {
+      max-width: 600px;
+      margin: auto;
+      margin-bottom: 30px;
+      color: #344329;
+    }
+
+    .dark-btn {
+      background: #081008;
+      color: white;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+    footer {
+      padding: 40px 25px;
+      background: #040b07;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #d8ff4f;
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      color: #777;
+      font-size: 13px;
+    }
+
+    /* =========================
+       SCROLL BUTTON
+    ========================== */
+    #topBtn {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 45px;
+      height: 45px;
+      border: none;
+      border-radius: 50%;
+      background: #d8ff4f;
+      color: #081008;
+      font-size: 20px;
+      cursor: pointer;
+      display: none;
+      z-index: 999;
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+    @media (max-width: 800px) {
+
+      .menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 75px;
+        left: 0;
+        width: 100%;
+        background: #07110c;
+        flex-direction: column;
+        padding: 25px;
+        gap: 20px;
+        display: none;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-image {
+        height: 350px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery-card.large {
+        grid-row: span 1;
+        height: 320px;
+      }
+
+      .fact-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-card,
+      .gallery-card.large {
+        height: 300px;
+      }
+
+      .facts {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 75px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+  <header>
+    <nav>
+      <a href="#home" class="logo">
+        AAV<span>Animal</span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn">
+        ☰
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#facts">Facts</a></li>
+        <li><a href="#conservation">Wildlife</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+  <main>
+
+    <section class="hero" id="home">
+      <div class="hero-content">
+
+        <div class="hero-text">
+
+          <div class="tag">
+            🐒 WILD • SMART • SOCIAL
+          </div>
+
+          <h1>
+            Meet The<br>
+            <span>Chimpanzee</span>
+          </h1>
+
+          <p>
+            Welcome to AAV Animal — a visual journey into the world
+            of chimpanzees, their intelligence, social lives and
+            incredible connection with nature.
+          </p>
+
+          <div class="buttons">
+            <a href="#about" class="btn btn-primary">
+              Explore World →
+            </a>
+
+            <a href="#gallery" class="btn btn-outline">
+              View Gallery
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+    <section class="about" id="about">
+
+      <div class="container">
+
+        <div class="about-grid">
+
+          <div class="about-image">
+            <img
+              src="https://images.unsplash.com/photo-1589656966895-2f33e7653819?auto=format&fit=crop&w=1000&q=85"
+              alt="Chimpanzee"
+            >
+          </div>
+
+          <div class="about-text">
+
+            <div class="section-label">
+              About The Species
+            </div>
+
+            <h2 class="section-title">
+              More than just<br>
+              a wild animal.
+            </h2>
+
+            <p>
+              Chimpanzees are highly intelligent primates known for
+              their complex social groups, communication and
+              problem-solving abilities.
+            </p>
+
+            <p>
+              They live mainly in tropical forests and woodlands
+              of Africa and spend much of their lives in social
+              communities.
+            </p>
+
+            <div class="facts">
+
+              <div class="fact">
+                <strong>98%</strong>
+                <span>DNA similarity with humans</span>
+              </div>
+
+              <div class="fact">
+                <strong>50+</strong>
+                <span>Years possible lifespan</span>
+              </div>
+
+              <div class="fact">
+                <strong>Africa</strong>
+                <span>Natural home</span>
+              </div>
+
+              <div class="fact">
+                <strong>Social</strong>
+                <span>Community living</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         GALLERY
+    ========================== -->
+    <section class="gallery" id="gallery">
+
+      <div class="container">
+
+        <div class="section-label">
+          Visual Stories
+        </div>
+
+        <h2 class="section-title">
+          Into the wild.
+        </h2>
+
+        <p class="section-description">
+          Explore a collection of chimpanzee moments from the
+          forests and wildlife world.
+        </p>
+
+        <div class="gallery-grid">
+
+          <div class="gallery-card large">
+            <img
+              src="https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=1000&q=85"
+              alt="Chimpanzee in nature"
+            >
+
+            <div class="gallery-overlay">
+              <h3>Wild Spirit</h3>
+            </div>
+          </div>
+
+          <div class="gallery-card">
+            <img
+              src="https://images.unsplash.com/photo-1605559911160-a3d1b2d7b6e3?auto=format&fit=crop&w=900&q=85"
+              alt="Chimpanzee portrait"
+            >
+
+            <div class="gallery-overlay">
+              <h3>Curious Mind</h3>
+            </div>
+          </div>
+
+          <div class="gallery-card">
+            <img
+              src="https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?auto=format&fit=crop&w=900&q=85"
+              alt="Chimpanzee"
+            >
+
+            <div class="gallery-overlay">
+              <h3>Forest Life</h3>
+            </div>
+          </div>
+
+          <div class="gallery-card">
+            <img
+              src="https://images.unsplash.com/photo-1504006833117-8886a355efbf?auto=format&fit=crop&w=900&q=85"
+              alt="Wild animal"
+            >
+
+            <div class="gallery-overlay">
+              <h3>Wild Connection</h3>
+            </div>
+          </div>
+
+          <div class="gallery-card">
+            <img
+              src="https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=900&q=85"
+              alt="Forest wildlife"
+            >
+
+            <div class="gallery-overlay">
+              <h3>Into Nature</h3>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         FACTS
+    ========================== -->
+    <section class="facts-section" id="facts">
+
+      <div class="container">
+
+        <div class="section-label">
+          Did You Know?
+        </div>
+
+        <h2 class="section-title">
+          Chimpanzee facts.
+        </h2>
+
+        <p class="section-description">
+          A few fascinating facts about one of our closest living
+          animal relatives.
+        </p>
+
+        <div class="fact-cards">
+
+          <div class="info-card">
+            <div class="info-icon">🧠</div>
+            <h3>Highly Intelligent</h3>
+            <p>
+              Chimpanzees can use tools and solve problems,
+              demonstrating impressive cognitive abilities.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">🌳</div>
+            <h3>Forest Dwellers</h3>
+            <p>
+              They spend time both in trees and on the ground,
+              depending on their environment and activities.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">👥</div>
+            <h3>Social Animals</h3>
+            <p>
+              Chimpanzees live in communities and maintain
+              complex social relationships.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONSERVATION
+    ========================== -->
+    <section class="conservation" id="conservation">
+
+      <div class="container">
+
+        <div class="conservation-box">
+
+          <div class="section-label">
+            Protect Wildlife
+          </div>
+
+          <h2 class="section-title">
+            Their future<br>
+            depends on us.
+          </h2>
+
+          <p>
+            Protecting forests, reducing habitat loss and supporting
+            responsible wildlife conservation can help protect
+            chimpanzees and the ecosystems they depend on.
+          </p>
+
+          <div class="progress">
+            <span></span>
+          </div>
+
+          <p>
+            <strong>Wildlife awareness</strong> — every small action
+            can make a difference.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+    <section class="cta">
+
+      <div class="container">
+
+        <h2>
+          Love animals.<br>
+          Protect nature.
+        </h2>
+
+        <p>
+          Learn, share and inspire others to care about wildlife.
+        </p>
+
+        <a href="#home" class="btn dark-btn">
+          Back to Top ↑
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+  <footer>
+
+    <div class="footer-logo">
+      AAV Animal 🐒
+    </div>
+
+    <p>
+      © 2026 AAV Animal. Made with ❤️ for wildlife.
+    </p>
+
+  </footer>
+
+
+  <!-- SCROLL TO TOP -->
+  <button id="topBtn">↑</button>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+  <script>
+
+    // Mobile Menu
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+
+      if (navLinks.classList.contains("active")) {
+        menuBtn.textContent = "✕";
+      } else {
+        menuBtn.textContent = "☰";
+      }
+    });
+
+
+    // Close mobile menu after clicking a link
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+        menuBtn.textContent = "☰";
+      });
+
+    });
+
+
+    // Scroll to Top Button
+    const topBtn = document.getElementById("topBtn");
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 500) {
+        topBtn.style.display = "block";
+      } else {
+        topBtn.style.display = "none";
+      }
+
+    });
+
+    topBtn.addEventListener("click", () => {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    });
+
+
+    // Simple image click effect
+    document.querySelectorAll(".gallery-card").forEach(card => {
+
+      card.addEventListener("click", () => {
+
+        card.style.transform = "scale(0.97)";
+
+        setTimeout(() => {
+          card.style.transform = "";
+        }, 150);
+
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>
